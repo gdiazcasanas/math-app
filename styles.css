@@ -1,0 +1,182 @@
+:root {
+  --bg: #f2f2f5;
+  --surface: #ffffff;
+  --display-bg: #1c1c22;
+  --display-text: #ffffff;
+  --display-muted: #9a9aa5;
+  --key-bg: #e8e8ee;
+  --key-text: #1c1c22;
+  --key-hover: #dcdce4;
+  --action-bg: #d0d0da;
+  --action-hover: #c2c2ce;
+  --accent: #f59f0b;
+  --accent-hover: #d98a06;
+  --accent-text: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --muted-text: #6b6b76;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15151a;
+    --surface: #212129;
+    --display-bg: #0e0e12;
+    --key-bg: #34343e;
+    --key-text: #f5f5f7;
+    --key-hover: #40404c;
+    --action-bg: #4a4a57;
+    --action-hover: #575765;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    --muted-text: #9a9aa5;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--key-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.calculator {
+  width: 100%;
+  max-width: 360px;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.title {
+  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-text);
+  text-align: center;
+}
+
+.display {
+  padding: 18px 18px 14px;
+  border-radius: 14px;
+  background: var(--display-bg);
+  text-align: right;
+  overflow: hidden;
+}
+
+.expression {
+  min-height: 20px;
+  font-size: 14px;
+  color: var(--display-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry {
+  display: block;
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--display-text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry.is-error {
+  color: #ff6b6b;
+  font-size: 28px;
+}
+
+.keypad {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  padding: 0;
+  height: 60px;
+  border: none;
+  border-radius: 12px;
+  background: var(--key-bg);
+  color: var(--key-text);
+  font-size: 22px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.12s ease, transform 0.06s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:hover {
+  background: var(--key-hover);
+}
+
+.key:active {
+  transform: scale(0.96);
+}
+
+.key:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.key--action {
+  background: var(--action-bg);
+  font-size: 20px;
+}
+
+.key--action:hover {
+  background: var(--action-hover);
+}
+
+.key--operator,
+.key--equals {
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 500;
+}
+
+.key--operator:hover,
+.key--equals:hover {
+  background: var(--accent-hover);
+}
+
+/* Highlights the operator that is currently pending. */
+.key--operator.is-active {
+  background: var(--accent-text);
+  color: var(--accent);
+}
+
+.hint {
+  margin: 16px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--muted-text);
+}
+
+kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--key-bg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
