@@ -20,7 +20,23 @@ That's the whole setup. Nothing to install.
 - Full keyboard support — digits, `+` `-` `*` `/`, `Enter`, `Backspace`, `Esc`
 - Thousands separators and floating-point cleanup, so `0.1 + 0.2` reads as `0.3`
 - Divide-by-zero and out-of-range results surface as errors instead of `Infinity`
-- Light and dark themes, following your system preference
+- Switchable light / dark / system theme, remembered between visits
+
+## Themes
+
+The control in the header picks between three modes:
+
+| Mode | Behavior |
+| --- | --- |
+| ☀ Light | Always light, even if the OS is in dark mode |
+| ☾ Dark | Always dark, even if the OS is in light mode |
+| ⚙ System | Follows the OS setting; this is the default |
+
+Light and Dark are saved to `localStorage` under `math-app-theme` and applied by
+an inline script in `<head>`, so a saved theme never flashes the wrong colors on
+load. System is the default and stores nothing. Every storage access is wrapped
+in `try`/`catch` — in a private window the theme still switches, it just isn't
+remembered.
 
 ## Layout
 
@@ -29,6 +45,7 @@ That's the whole setup. Nothing to install.
 | `index.html` | Markup for the display and keypad |
 | `styles.css` | Theming, layout, and key styles |
 | `app.js` | Calculator state, operations, and input handling |
+| `theme.js` | Theme selection and persistence |
 
 ## Adding an operation
 

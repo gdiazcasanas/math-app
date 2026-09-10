@@ -1,4 +1,15 @@
+/*
+ * Theming
+ *
+ * Light is the base palette. The dark palette is applied in two situations,
+ * so it appears twice below:
+ *   1. the OS asks for dark and the user has not forced light
+ *   2. the user explicitly picked dark
+ * `data-theme` is set on <html> by theme.js; when it is absent, the OS wins.
+ */
 :root {
+  color-scheme: light;
+
   --bg: #f2f2f5;
   --surface: #ffffff;
   --display-bg: #1c1c22;
@@ -18,7 +29,9 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
     --bg: #15151a;
     --surface: #212129;
     --display-bg: #0e0e12;
@@ -31,6 +44,22 @@
     --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     --muted-text: #9a9aa5;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #15151a;
+  --surface: #212129;
+  --display-bg: #0e0e12;
+  --key-bg: #34343e;
+  --key-text: #f5f5f7;
+  --key-hover: #40404c;
+  --action-bg: #4a4a57;
+  --action-hover: #575765;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --muted-text: #9a9aa5;
 }
 
 * {
@@ -59,14 +88,60 @@ body {
   box-shadow: var(--shadow);
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
 .title {
-  margin: 0 0 16px;
+  margin: 0;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted-text);
-  text-align: center;
+}
+
+/* Segmented Light / Dark / System control. */
+.theme-switch {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  border: none;
+  border-radius: 9px;
+  background: var(--key-bg);
+}
+
+.theme-switch__option {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: var(--muted-text);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-switch__option:hover {
+  color: var(--key-text);
+}
+
+.theme-switch__option[aria-checked="true"] {
+  background: var(--surface);
+  color: var(--key-text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+.theme-switch__option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 .display {
