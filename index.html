@@ -5,10 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Math App</title>
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // Applied before first paint so a saved theme never flashes the wrong colors.
+    try {
+      var saved = localStorage.getItem("math-app-theme");
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch (err) {
+      /* Storage blocked — fall back to the system theme. */
+    }
+  </script>
 </head>
 <body>
   <main class="calculator">
-    <h1 class="title">Math App</h1>
+    <div class="header">
+      <h1 class="title">Math App</h1>
+
+      <div class="theme-switch" role="radiogroup" aria-label="Color theme">
+        <button type="button" class="theme-switch__option" role="radio" aria-checked="false" data-theme-choice="light" title="Light theme">&#9788;</button>
+        <button type="button" class="theme-switch__option" role="radio" aria-checked="false" data-theme-choice="dark" title="Dark theme">&#9789;</button>
+        <button type="button" class="theme-switch__option" role="radio" aria-checked="false" data-theme-choice="system" title="Match system theme">&#9881;</button>
+      </div>
+    </div>
 
     <div class="display">
       <div class="expression" id="expression" aria-hidden="true"></div>
@@ -45,6 +64,7 @@
     <p class="hint">Tip: you can also use your keyboard &mdash; digits, <kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd>, <kbd>Enter</kbd>, <kbd>Esc</kbd>.</p>
   </main>
 
+  <script src="theme.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
