@@ -228,6 +228,15 @@ body {
   font-weight: 500;
 }
 
+/* Full-width bottom row, so the operator column stays aligned. */
+.key--equals {
+  grid-column: 1 / -1;
+}
+
+.key--operator sup {
+  font-size: 0.6em;
+}
+
 .key--operator:hover,
 .key--equals:hover {
   background: var(--accent-hover);

@@ -17,10 +17,16 @@
     "/": function (a, b) {
       if (b === 0) throw new RangeError("Cannot divide by zero");
       return a / b;
+    },
+    "^": function (a, b) {
+      var result = Math.pow(a, b);
+      // e.g. (-8) ^ 0.5 has no real answer.
+      if (isNaN(result)) throw new RangeError("Not a real number");
+      return result;
     }
   };
 
-  var OPERATOR_SYMBOLS = { "+": "+", "-": "−", "*": "×", "/": "÷" };
+  var OPERATOR_SYMBOLS = { "+": "+", "-": "−", "*": "×", "/": "÷", "^": "^" };
 
   var state = {
     entry: "0",          // the number currently shown, as a raw string
