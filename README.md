@@ -17,12 +17,14 @@ That's the whole setup. Nothing to install.
 
 - Add, subtract, multiply, divide
 - Powers (`xʸ`) — `2 ^ 10` is `1,024`, `9 ^ 0.5` is `3`
+- Square root (`√`, or `r` on the keyboard) — applies to the number on screen right
+  away, so `16 √` is `4` and `2 + 9 √ =` is `5`
 - Percent, sign toggle, backspace, and clear
-- Full keyboard support — digits, `+` `-` `*` `/` `^`, `Enter`, `Backspace`, `Esc`
+- Full keyboard support — digits, `+` `-` `*` `/` `^`, `r` for `√`, `Enter`, `Backspace`, `Esc`
 - Thousands separators and floating-point cleanup, so `0.1 + 0.2` reads as `0.3`
 - Divide-by-zero and out-of-range results surface as errors instead of `Infinity`,
-  and a negative number raised to a fractional power shows `Not a real number`
-  instead of `NaN`
+  and a negative number raised to a fractional power or the square root of a
+  negative number shows `Not a real number` instead of `NaN`
 - Switchable light / dark / system theme, remembered between visits
 
 Operations are evaluated strictly left to right with no operator precedence, like

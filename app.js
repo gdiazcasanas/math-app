@@ -195,6 +195,21 @@
     state.replaceEntry = false;
   }
 
+  function squareRoot() {
+    if (state.error) return;
+
+    var value = currentValue();
+    if (value < 0) {
+      fail("Not a real number");
+      return;
+    }
+
+    // With nothing pending, show what was rooted; otherwise keep "2 +" visible.
+    if (state.operator === null) state.expression = "√" + withGrouping(state.entry) + " =";
+    state.entry = toEntryString(Math.sqrt(value));
+    state.replaceEntry = false;
+  }
+
   function backspace() {
     if (state.error) {
       clearAll();
@@ -214,6 +229,7 @@
     clear: clearAll,
     backspace: backspace,
     percent: percent,
+    sqrt: squareRoot,
     negate: negate,
     decimal: inputDecimal,
     equals: equals
@@ -256,6 +272,8 @@
       clearAll();
     } else if (key === "%") {
       percent();
+    } else if (key === "r") {
+      squareRoot();
     } else {
       handled = false;
     }

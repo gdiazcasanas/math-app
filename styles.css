@@ -228,9 +228,9 @@ body {
   font-weight: 500;
 }
 
-/* Full-width bottom row, so the operator column stays aligned. */
+/* Fills the bottom row after the √ key, so the operator column stays aligned. */
 .key--equals {
-  grid-column: 1 / -1;
+  grid-column: 2 / -1;
 }
 
 .key--operator sup {
