@@ -17,10 +17,16 @@
     "/": function (a, b) {
       if (b === 0) throw new RangeError("Cannot divide by zero");
       return a / b;
+    },
+    "^": function (a, b) {
+      var result = Math.pow(a, b);
+      // A negative base with a fractional exponent has no real root.
+      if (isNaN(result)) throw new RangeError("Result is not a real number");
+      return result;
     }
   };
 
-  var OPERATOR_SYMBOLS = { "+": "+", "-": "−", "*": "×", "/": "÷" };
+  var OPERATOR_SYMBOLS = { "+": "+", "-": "−", "*": "×", "/": "÷", "^": "^" };
 
   var state = {
     entry: "0",          // the number currently shown, as a raw string

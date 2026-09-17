@@ -212,6 +212,13 @@ body {
   outline-offset: 2px;
 }
 
+/* Exponent in the x^y label; `sup` alone would shrink the whole key. */
+.key sup {
+  font-size: 0.6em;
+  vertical-align: super;
+  line-height: 0;
+}
+
 .key--action {
   background: var(--action-bg);
   font-size: 20px;

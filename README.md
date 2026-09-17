@@ -16,11 +16,33 @@ That's the whole setup. Nothing to install.
 ## Features
 
 - Add, subtract, multiply, divide
+- Power (`xʸ`) — the first of the scientific functions
 - Percent, sign toggle, backspace, and clear
-- Full keyboard support — digits, `+` `-` `*` `/`, `Enter`, `Backspace`, `Esc`
+- Full keyboard support — digits, `+` `-` `*` `/` `^`, `Enter`, `Backspace`, `Esc`
 - Thousands separators and floating-point cleanup, so `0.1 + 0.2` reads as `0.3`
-- Divide-by-zero and out-of-range results surface as errors instead of `Infinity`
+- Divide-by-zero, out-of-range, and non-real results surface as errors instead of
+  `Infinity` or `NaN`
 - Switchable light / dark / system theme, remembered between visits
+
+## Power
+
+`xʸ` is a binary operator like `+` or `×`: enter the base, press `xʸ`, enter the
+exponent, then `=`. The keyboard shortcut is `^`.
+
+| Input | Result |
+| --- | --- |
+| `2 xʸ 8 =` | `256` |
+| `9 xʸ 0.5 =` | `3` (a square root) |
+| `2 xʸ 3 ± =` | `0.125` |
+
+Use the `±` key for a negative base or exponent — typing `-` starts a subtraction
+instead, since evaluation is left-to-right.
+
+Two results are rejected rather than shown as `Infinity` or `NaN`:
+
+- An overflow such as `8 xʸ 99999` reports *Result is out of range*
+- A negative base with a fractional exponent, such as `-8 xʸ 0.5`, has no real
+  root and reports *Result is not a real number*
 
 ## Themes
 
@@ -59,4 +81,8 @@ var OPERATIONS = {
 ```
 
 Add an entry there, give it a symbol in `OPERATOR_SYMBOLS`, and add a button with
-a matching `data-operator` attribute in `index.html`.
+a matching `data-operator` attribute in `index.html`. The keyboard handler picks
+it up automatically — pressing the key that matches the lookup selects it.
+
+Note that evaluation is left-to-right with **no operator precedence**, the way a
+pocket calculator behaves. `2 + 3 × 4` is `20`, and `2 + 3 xʸ 2` is `25`.
