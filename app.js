@@ -195,6 +195,21 @@
     state.replaceEntry = false;
   }
 
+  /** Unary, so it applies to the entry right away the way percent does. */
+  function squareRoot() {
+    if (state.error) return;
+
+    var value = currentValue();
+    // A negative radicand has no real root.
+    if (value < 0) {
+      fail("Result is not a real number");
+      return;
+    }
+
+    state.entry = toEntryString(Math.sqrt(value));
+    state.replaceEntry = false;
+  }
+
   function backspace() {
     if (state.error) {
       clearAll();
@@ -214,6 +229,7 @@
     clear: clearAll,
     backspace: backspace,
     percent: percent,
+    root: squareRoot,
     negate: negate,
     decimal: inputDecimal,
     equals: equals
@@ -256,6 +272,8 @@
       clearAll();
     } else if (key === "%") {
       percent();
+    } else if (key === "r" || key === "R") {
+      squareRoot();
     } else {
       handled = false;
     }
